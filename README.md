@@ -2,6 +2,10 @@
 
 Interactive Formula 1 analytics project built using Tableau Public.
 
+## 🔗 Live Interactive Dashboard
+👉 **[Click Here to View Live Tableau Dashboard]
+https://public.tableau.com/app/profile/parul.dubey2305/viz/F1Analytics_17933715576700/STORY
+
 
 ## 🏎️ Key Visualizations
 - **Driver Leaderboard**: Dynamic ranking using Top-N parameter slider.
@@ -9,6 +13,5 @@ Interactive Formula 1 analytics project built using Tableau Public.
 - **Driver Reliability & DNF Breakdown**: Failure categorization across teams.
 - **Global Race Map**: Geographic distribution of Grand Prix circuits.
 -
-#WEB INTEGRATION
 
-file:///C:/Users/hp/Desktop/HEALTH-360-WEBSITE/F1%20WEBSITE.HTML
+
