@@ -1,0 +1,310 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formula 1 Race Intelligence Platform | SkillWallet</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tableau Embedding API v3 -->
+    <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        f1: {
+                            red: '#e10600',
+                            darkred: '#960400',
+                            bg: '#0a0b10',
+                            card: '#13151f',
+                            cardhover: '#191c2b',
+                            border: '#24283b',
+                            muted: '#8e93a6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        tech: ['"Orbitron"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Carbon / Speed Grid pattern */
+        .carbon-bg {
+            background-color: #0a0b10;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(225, 6, 0, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 65%, rgba(225, 6, 0, 0.05) 0%, transparent 45%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+        }
+
+        .red-glow {
+            box-shadow: 0 0 25px rgba(225, 6, 0, 0.35);
+        }
+
+        .racing-stripe {
+            background: linear-gradient(90deg, #e10600 0%, #ff4d47 60%, transparent 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0b10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #24283b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #e10600;
+        }
+    </style>
+</head>
+<body class="carbon-bg text-slate-100 font-sans min-h-screen flex flex-col selection:bg-f1-red selection:text-white">
+
+    <!-- Top Status Banner -->
+    <header class="border-b border-f1-border bg-[#0e1017]/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded bg-f1-red/10 border border-f1-red/40 flex items-center justify-center text-f1-red group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-flag-checkered text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-tech text-xl sm:text-2xl font-bold tracking-wider text-white">FORMULA <span class="text-f1-red">1</span></span>
+                    <span class="block text-[10px] tracking-widest text-f1-muted font-mono uppercase">RACE INTELLIGENCE</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-1 sm:gap-6 text-sm font-semibold">
+                <a href="#home" class="text-slate-300 hover:text-f1-red transition-colors px-2 py-1">Home</a>
+                <a href="#dimensions" class="text-slate-300 hover:text-f1-red transition-colors px-2 py-1">Dimensions</a>
+                <a href="#dashboard" class="text-slate-300 hover:text-f1-red transition-colors px-2 py-1">Tableau Dashboard</a>
+                <a href="#about" class="text-slate-300 hover:text-f1-red transition-colors px-2 py-1">SkillWallet & Pipeline</a>
+            </nav>
+
+            <!-- Quick Action button -->
+            <div class="flex items-center gap-3">
+                <a href="#dashboard" class="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-bold bg-f1-red hover:bg-f1-darkred text-white rounded transition shadow-lg shadow-f1-red/20 uppercase tracking-wider">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Live Viz</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- 1. Hero Section -->
+        <section id="home" class="relative pt-16 pb-20 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Project Pill / Tag -->
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-f1-border bg-f1-card text-xs font-mono text-slate-300 mb-8">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>SKILLWALLET REPORT VERIFIED</span>
+                    <span class="text-f1-muted">•</span>
+                    <span class="text-f1-red font-bold">Assigned to: Parul Dubey</span>
+                </div>
+
+                <!-- Main Headline -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-8">
+                        <h1 class="font-tech text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight uppercase leading-[1.1] mb-6">
+                            FORMULA <span class="text-f1-red">1</span><br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+                                Race Intelligence Dashboard
+                            </span>
+                        </h1>
+                        <p class="text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed mb-8">
+                            Deep-dive analytics into Formula 1 Championship data — from driver performance metrics and team strategy to circuit analysis and historical championship trends. Powered by Tableau visualization intelligence.
+                        </p>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap gap-4 items-center">
+                            <a href="#dashboard" onclick="setVizMode('dashboard')" class="px-7 py-3.5 rounded bg-f1-red hover:bg-f1-darkred text-white font-bold tracking-wider uppercase text-sm flex items-center gap-2.5 shadow-xl shadow-f1-red/25 transition transform active:scale-95">
+                                <i class="fa-solid fa-table-cells-large"></i>
+                                <span>View Dashboard</span>
+                            </a>
+                            <a href="#dashboard" onclick="setVizMode('story')" class="px-7 py-3.5 rounded border border-f1-border hover:border-f1-red bg-f1-card hover:bg-f1-cardhover text-slate-200 hover:text-white font-bold tracking-wider uppercase text-sm flex items-center gap-2.5 transition">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span>Explore Story</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Side High-Tech Badge -->
+                    <div class="lg:col-span-4 hidden lg:block">
+                        <div class="p-6 rounded-xl bg-gradient-to-b from-f1-card to-[#0d0e15] border border-f1-border relative overflow-hidden">
+                            <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl text-white">
+                                <i class="fa-solid fa-tachograph-digital"></i>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-mono uppercase tracking-widest text-f1-muted">Telemetry Status</span>
+                                <span class="px-2 py-0.5 text-[10px] font-bold bg-f1-red/20 text-f1-red border border-f1-red/30 rounded">ACTIVE EXTRACT</span>
+                            </div>
+                            <div class="space-y-3 font-mono text-xs text-slate-400">
+                                <div class="flex justify-between border-b border-f1-border/50 pb-2">
+                                    <span>Engine Framework:</span>
+                                    <span class="text-white font-bold">Tableau v2024 / API v3</span>
+                                </div>
+                                <div class="flex justify-between border-b border-f1-border/50 pb-2">
+                                    <span>Ingestion Source:</span>
+                                    <span class="text-white font-bold">Ergast F1 DB / CSV</span>
+                                </div>
+                                <div class="flex justify-between border-b border-f1-border/50 pb-2">
+                                    <span>Integration Mode:</span>
+                                    <span class="text-white font-bold">Flask Embedded REST</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Interactive LOD:</span>
+                                    <span class="text-emerald-400 font-bold">Calculated Fields Enabled</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 KPI Banner Cards matching SkillWallet reference -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16">
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-lg text-center hover:border-f1-red/50 transition">
+                        <div class="text-f1-red mb-2 text-xl"><i class="fa-solid fa-trophy"></i></div>
+                        <div class="font-tech text-3xl sm:text-4xl font-extrabold text-white tracking-wider">897</div>
+                        <div class="text-[11px] sm:text-xs uppercase tracking-widest text-f1-muted mt-1 font-semibold">Grand Prix Events</div>
+                    </div>
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-lg text-center hover:border-f1-red/50 transition">
+                        <div class="text-f1-red mb-2 text-xl"><i class="fa-solid fa-route"></i></div>
+                        <div class="font-tech text-3xl sm:text-4xl font-extrabold text-white tracking-wider">33</div>
+                        <div class="text-[11px] sm:text-xs uppercase tracking-widest text-f1-muted mt-1 font-semibold">Circuits Tracked</div>
+                    </div>
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-lg text-center hover:border-f1-red/50 transition">
+                        <div class="text-f1-red mb-2 text-xl"><i class="fa-solid fa-helmet-un"></i></div>
+                        <div class="font-tech text-3xl sm:text-4xl font-extrabold text-white tracking-wider">372</div>
+                        <div class="text-[11px] sm:text-xs uppercase tracking-widest text-f1-muted mt-1 font-semibold">Driver Profiles</div>
+                    </div>
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-lg text-center hover:border-f1-red/50 transition">
+                        <div class="text-f1-red mb-2 text-xl"><i class="fa-solid fa-gauge-high"></i></div>
+                        <div class="font-tech text-3xl sm:text-4xl font-extrabold text-white tracking-wider">15</div>
+                        <div class="text-[11px] sm:text-xs uppercase tracking-widest text-f1-muted mt-1 font-semibold">Strategic KPIs</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Intelligence Dimensions Section -->
+        <section id="dimensions" class="py-16 border-t border-f1-border bg-[#0c0d14]/70">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-14">
+                    <span class="text-xs font-mono uppercase tracking-widest text-f1-red font-bold">Analytics Architecture</span>
+                    <h2 class="font-tech text-3xl sm:text-4xl font-bold uppercase tracking-wide text-white mt-2">
+                        Intelligence Dimensions
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base mt-3">
+                        Six strategic analytical dimensions powering our Formula 1 Race Intelligence platform.
+                    </p>
+                </div>
+
+                <!-- 6 Dimension Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dim 1 -->
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-xl hover:border-f1-red/60 transition group">
+                        <div class="w-12 h-12 rounded-lg bg-f1-red/10 border border-f1-red/30 flex items-center justify-center text-f1-red text-xl mb-4 group-hover:bg-f1-red group-hover:text-white transition">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2">Global Race Overview</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Cross-era geographical and calendar distributions across 33 global host venues, analyzing environmental condition profiles and circuit lengths.
+                        </p>
+                    </div>
+
+                    <!-- Dim 2 -->
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-xl hover:border-f1-red/60 transition group">
+                        <div class="w-12 h-12 rounded-lg bg-f1-red/10 border border-f1-red/30 flex items-center justify-center text-f1-red text-xl mb-4 group-hover:bg-f1-red group-hover:text-white transition">
+                            <i class="fa-solid fa-stopwatch"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2">Driver Performance Metrics</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Lap times, qualifying pace delta, sector differentials, overtaking statistics, and career podium-to-grid conversion efficiencies.
+                        </p>
+                    </div>
+
+                    <!-- Dim 3 -->
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-xl hover:border-f1-red/60 transition group">
+                        <div class="w-12 h-12 rounded-lg bg-f1-red/10 border border-f1-red/30 flex items-center justify-center text-f1-red text-xl mb-4 group-hover:bg-f1-red group-hover:text-white transition">
+                            <i class="fa-solid fa-car-tunnel"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2">Constructor Championship Battle</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Cumulative team points, mechanical reliability vs engine manufacturer records, and driver pairing contribution splits.
+                        </p>
+                    </div>
+
+                    <!-- Dim 4 -->
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-xl hover:border-f1-red/60 transition group">
+                        <div class="w-12 h-12 rounded-lg bg-f1-red/10 border border-f1-red/30 flex items-center justify-center text-f1-red text-xl mb-4 group-hover:bg-f1-red group-hover:text-white transition">
+                            <i class="fa-solid fa-wrench"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2">Pit Stop Efficiency &amp; Strategy</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Tire degradation trends, sub-2.5s stationary stop distributions, tire compound life deltas, and the net positional undercut impact.
+                        </p>
+                    </div>
+
+                    <!-- Dim 5 -->
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-xl hover:border-f1-red/60 transition group">
+                        <div class="w-12 h-12 rounded-lg bg-f1-red/10 border border-f1-red/30 flex items-center justify-center text-f1-red text-xl mb-4 group-hover:bg-f1-red group-hover:text-white transition">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2">Championship Predictions</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Historical scenario modeling and championship probability trajectories derived from qualification pole-to-win conversions.
+                        </p>
+                    </div>
+
+                    <!-- Dim 6 -->
+                    <div class="bg-f1-card border border-f1-border p-6 rounded-xl hover:border-f1-red/60 transition group">
+                        <div class="w-12 h-12 rounded-lg bg-f1-red/10 border border-f1-red/30 flex items-center justify-center text-f1-red text-xl mb-4 group-hover:bg-f1-red group-hover:text-white transition">
+                            <i class="fa-solid fa-cloud-showers-heavy"></i>
+                        </div>
+                        <h3 class="font-display text-lg font-bold text-white mb-2">Weather &amp; Safety Cars</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            Safety car deployment probabilities per circuit, dynamic rain probability disruption matrices, and virtual safety car delta calculations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Tableau Dashboard & Story Section -->
+        <section id="dashboard" class="py-16 border-t border-f1-border bg-[#0a0b10]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header + Mode Switcher -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-f1-red"></span>
+                            <span class="text-xs font-mono uppercase tracking-widest text-f1-muted">Embedded Visualization</span>
+                        </div>
+                        <h2 class="font-tech text-3xl sm:text-4xl font-bold uppercase tracking-wide text-white">
+                            Race Intelligence Dashboard
+                        </h2>
+                    </div>
+
+                    <!-- Mode Control Tabs -->
+                    <div class="inline-flex p-1 rounded-lg bg-f1-card border border-f1-border self-start md:self-auto">
+                        <button id="btn-tab
